@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+callingDir=$(pwd)
+rootDir=$(git rev-parse --show-toplevel)
+scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+sloccount --duplicates --details . 2>/dev/null > $rootDir/sloccount.sc
+
+python3 $scriptDir/main.py \
+  $rootDir/sloccount.sc \
+  $rootDir/.gitignore \
+  $rootDir/.locignore
+
+rm $rootDir/sloccount.sc
