@@ -2,6 +2,7 @@
 callingDir=$(pwd)
 rootDir=$(git rev-parse --show-toplevel)
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $rootDir
 sloccount --duplicates --details . 2>/dev/null > $rootDir/sloccount.sc
 
 python3 $scriptDir/main.py \

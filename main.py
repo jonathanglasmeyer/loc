@@ -1,15 +1,13 @@
 from ascii_graph import Pyasciigraph
 from pprint import pprint
 from itertools import *
-from os.path import basename
+from os.path import basename as _basename
 from os.path import normpath
-# from os.path import dirname as basename
+# from os.path import dirname as _basename
 import sys, os
 from fnmatch import fnmatch
 
-# def basename(fpath):
-#     last = fpath.split('/')[-2]
-#     return os.path.join(last, _basename(fpath))
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -18,6 +16,23 @@ class bcolors:
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
+    GREY ='\033[1;30m'
+def colorize(string, color):
+    return color + string + bcolors.ENDC
+
+def basename(fpath):
+    # print('')
+    # print(fpath)
+    try:
+        last = fpath.split('/')[-2] + '/'
+        if last == './': last = ''
+    except:
+        last = ''
+
+    # print(last)
+    plus_last_dir = colorize(last,bcolors.GREY) + _basename(fpath)
+    # return plus_last_dir
+    return plus_last_dir
 
 def read_sloccount_file(file_):
     with open(file_) as f:
@@ -56,8 +71,13 @@ def main(f, gitignore, locignore):
 
     number_max_char_places = \
             len(str(max(filtered_items, key=lambda i: len(str(i[0])))[0])) # lol.
-    max_fname_char_len = \
-            len(basename(max(filtered_items, key=lambda i: len(basename(i[3])))[3])) # lol. this wins a price for ugliest line possible
+
+    fname_len = lambda fname: len(basename(fname))
+
+    longest_item_by_fname = max(filtered_items,
+            key=lambda itemrow: fname_len(itemrow[3]))
+    max_fname_char_len = len(basename(longest_item_by_fname[3]))
+
     format_string = '{:<' + str(max_fname_char_len+2) + '}{}'
 
     func= lambda line: line[1]
@@ -68,13 +88,13 @@ def main(f, gitignore, locignore):
         print(bcolors.OKBLUE + key.upper() + bcolors.ENDC)
         sum = 0
         for item in group:
-            # "a string {0:>5}".format(foo)
+            # print(basename(item[3]))
             print(basename(format_string.format(basename(item[3]), str(item[0]).rjust(number_max_char_places))))
 
             sum += item[0]
         line_len = max_fname_char_len + 2 + number_max_char_places
         sum_formatted = bcolors.HEADER + '\u03a3 ' + str(sum) + bcolors.ENDC
-        print(sum_formatted.rjust(line_len+9))
+        print(sum_formatted.rjust(line_len-2))
         print('')
         graph_content.append((key, int(sum)))
 
