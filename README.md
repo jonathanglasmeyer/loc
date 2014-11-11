@@ -2,7 +2,7 @@
 
 `loc` is a LOC counter that respects `*.gitignore` and shows summaries for a whole git repo from any subfolder of this repo. 
 
-It also respects an optional `*.locignore` in which you can specify additional globbing patterns for files/folders that should not be counted.
+It also respects an optional `*.locignore` (in the root of a given git repo) in which you can specify additional globbing patterns for files/folders that should not be counted.
 
 ## Dependencies
 - `sloccount`
