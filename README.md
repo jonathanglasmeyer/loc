@@ -1,4 +1,6 @@
-# Git-Repo LOC Counter / Visualizer
+loc
+
+`loc` is a LOC counter that respects `*.gitignore` and shows summaries for a whole git repo from any subfolder of this repo. It also respects an optional `*.locignore` in which you can specify additional globbing patterns for files/folders that should not be counted.
 
 ## Dependencies
 - `sloccount`
@@ -9,4 +11,3 @@
 
 ## Usage:
 - run `loc` from any folder in a git repo.
-- it will respect `.gitignore`; optionally specify additional glob filters in `.locignore`.
