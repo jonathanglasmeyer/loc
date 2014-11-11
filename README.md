@@ -4,12 +4,15 @@
 
 It also respects an optional `*.locignore` (in the root of a given git repo) in which you can specify additional globbing patterns for files/folders that should not be counted.
 
-## Dependencies
+## screenshot:
+![screenshot](http://i.imgur.com/8mInetg.png)
+
+## dependencies
 - `sloccount`
 - `python3`
 
-## Setup
+## setup
 - add this repos folder to your `$PATH`
 
-## Usage:
+## usage:
 - run `loc` from any folder in a git repo.
