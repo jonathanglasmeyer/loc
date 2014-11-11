@@ -4,7 +4,7 @@
 
 It also respects an optional `*.locignore` (in the root of a given git repo) in which you can specify additional globbing patterns for files/folders that should not be counted.
 
-## screenshot:
+## screenshot
 ![screenshot](http://i.imgur.com/8mInetg.png)
 
 ## dependencies
